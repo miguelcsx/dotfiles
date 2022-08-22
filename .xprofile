@@ -1,0 +1,20 @@
+# Env vars
+export PATH=$HOME/.local/bin:$PATH
+export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+export PATH="$PATH:$GEM_HOME/bin"
+
+# Composer
+picom &
+
+# Network
+nm-applet &
+
+# Bluetooth
+# blueberry-tray &
+blueman-applet &
+
+# Automount Devices
+udiskie -s &
+
+# Volume
+volumeicon &
