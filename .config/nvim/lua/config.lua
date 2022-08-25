@@ -21,10 +21,12 @@ require('nvim-tree').setup()    -- Tree
 require('bufferline').setup {   -- Buffers
     options = {
         offsets = {
+            {
             filetype = 'NvimTree',
             text = 'File Explorer',
             highlight = 'Directory',
             text_align = 'left'
+            }
         },
     }
 }
