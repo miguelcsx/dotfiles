@@ -1,0 +1,15 @@
+namespace: acardenas
+multifile: true
+debug: true
+working_dir: /home/miguelcs/Documents/work/universe/.auxiliar/skims/test
+# working_dir: /home/miguelcs/Documents/work/universe/skims/test/data/lib_root/f052
+
+# language: EN
+# output:
+#   file_path: /path/to/results.csv
+#   file_path: /home/miguelcs/Documents/work/universe/.auxiliar/skims/test/results.csv
+#   format: CSV
+
+sast:
+  include:
+  - test.php

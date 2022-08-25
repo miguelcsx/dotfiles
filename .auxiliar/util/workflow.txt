@@ -1,0 +1,59 @@
+1. Create the test file
+
+```bash
+.auxiliar/skims/test/test.php
+```
+
+2. Create the approved test file
+
+```bash
+skims/skims/test/data/lib_root/<code>/<test_name>.php
+```
+
+3. Create the method
+
+```bash
+skims/skims/lib_sast/root/<code>/php.py
+```
+
+4. Create the shield SHIELD_BLOCKING
+
+```bash
+skims/skims/lib_sast/root/<code>/__init__.py
+```
+
+5. Add the finding to the graph
+
+```bash
+skims/skims/lib_sast/root/__init__.py
+```
+
+6. Add the metadata to the model
+
+```bash
+skims/skims/model/core.py
+```
+
+7. In case of symbolic evaluation
+
+7.1 Create the symbolic evaluation method
+
+```bash
+skims/skims/symbolic_eval/<code>/<type>/php.py
+```
+
+7.2 Add the symbolic evaluation method to the evaluator
+
+```bash
+skims/skims/symbolic_eval/<code>/<type>/__init__.py
+```
+7.3 Add the finding to the evaluator
+
+```bash
+skims/skims/symbolic_eval/cases/<type>.py
+```
+
+8. Execute the test
+```bash
+./.auxiliar/makes/run.sh <code>
+```
