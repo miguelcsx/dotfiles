@@ -3,71 +3,64 @@
 -- Imports
 local g = vim.g
 local api = vim.api
-local keymap = vim.keymap.set
 local map = api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 -- Leader
 g.mapleader = ' '
 
 -- Save & exit
-map('n', '<C-s>', ':w<CR>', {noremap = true})
-map('n', '<C-w>', ':q!<CR>', {noremap = true})
+map('n', '<C-s>', ':w<CR>', {noremap = true})       -- Save file
+map('n', '<C-q>', ':q!<CR>', {noremap = true})      -- Exit without saving
+map('n', '<leader>bd', ':bd<CR>', {noremap = true}) -- Buffer delete
 
 -- Side Bar
-map('n', '<C-b>', ':NvimTreeToggle<CR>', {})  -- Toggle Sidebar
+map('n', '<C-b>', ':NvimTreeToggle<CR>', {})  -- Toggle Tree
+map('n', '<A-b>', ':TagbarToggle<CR>', {}) -- Toggle Tags
+
+-- BufferLine
+map('n', '<S-h>', ':BufferLineCycleNext<CR>', {})   -- Next buffer
+map('n', '<S-l>', ':BufferLineCloseLeft<CR>', {})   -- Close prev buffer
+
+-- Terminal
+map('n', '<C-t>', ':split<CR>:terminal<CR>:resize 10<CR>', {})  -- Split terminal
 
 -- Tmux
 local nvim_tmux_nav = require('nvim-tmux-navigation')
-keymap('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateUp)
-keymap('n', "<C-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+keymap('n', "<leader> <C-j>", nvim_tmux_nav.NvimTmuxNavigateUp)
+keymap('n', "<leader> <C-k>", nvim_tmux_nav.NvimTmuxNavigateDown)
 keymap('n', "<C-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
 keymap('n', '<C-h>', nvim_tmux_nav.NvimTmuxNavigateLeft)
 
 -- Lsp
-api.nvim_create_autocmd('User', {
-  pattern = 'LspAttached',
-  desc = 'Acciones LSP',
-  callback = function()
-    local bufmap = function(mode, lhs, rhs)
-      local opts = {buffer = true}
-      keymap(mode, lhs, rhs, opts)
-    end
+-- Info under cursor
+map('n', 'K', ':lua vim.lsp.buf.hover()<CR>', {})
+-- Go to definition
+map('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', {})
+-- Go to declaration
+map('n', 'gD', ':lua vim.lsp.buf.declaration()<CR>', {})
+-- Show implementation
+map('n', 'gi', ':lua vim.lsp.buf.implementation()<CR>', {})
+-- Go to type definition
+map('n', 'go', ':lua vim.lsp.buf.type_definition()<CR>', {})
+-- List references
+map('n', 'gr', ':lua vim.lsp.buf.references()<CR>', {})
+-- Show function args
+map('n', '<C-k>', ':lua vim.lsp.buf.signature_help()<CR>', {})
+-- Rename symbol
+map('n', '<F2>', ':lua vim.lsp.buf.rename()<CR>', {})
+-- List avaliable "code actions"
+map('n', '<F4>', ':lua vim.lsp.buf.code_action()<CR>', {})
+map('x', '<F4>', ':lua vim.lsp.buf.range_code_action()<CR>', {})
+-- Show diagnostic under cursor
+map('n', 'gl', ':lua vim.diagnostic.open_float()<CR>', {})
+-- Go to prev diagnostic
+map('n', '[d', ':lua vim.diagnostic.goto_prev()<CR>', {})
+-- Go to next diagnostic
+map('n', ']d', ':lua vim.diagnostic.goto_next()<CR>', {})
 
-    -- Muestra información sobre símbolo debajo del cursor
-    bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+-- Telescope
+map('n', '<C-g>', ':Telescope<CR>', {})             -- Open Telescope
+map('n', '<C-f>', ':Telescope find_files<CR>', {})  -- Search files
+map('n', 'fb', ':Telescope buffers<CR>', {})        -- Show buffers
 
-    -- Saltar a definición
-    bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
-
-    -- Saltar a declaración
-    bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
-
-    -- Mostrar implementaciones
-    bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
-
-    -- Saltar a definición de tipo
-    bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
-
-    -- Listar referencias
-    bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
-
-    -- Mostrar argumentos de función
-    bufmap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-
-    -- Renombrar símbolo
-    bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
-
-    -- Listar "code actions" disponibles en la posición del cursor
-    bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
-
-    -- Mostrar diagnósticos de la línea actual
-    bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-
-    -- Saltar al diagnóstico anterior
-    bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-
-    -- Saltar al siguiente diagnóstico
-    bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
-  end
-})

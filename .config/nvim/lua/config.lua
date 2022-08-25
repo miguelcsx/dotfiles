@@ -10,14 +10,30 @@ local opt = vim.opt
 -- Plugin Configurations
 
 -- Status Line
-require('lualine').setup()          -- Lua Status-line
+require('lualine').setup()      -- Lua Status-line
 
 
 -- File-system navigation
-require('nvim-tree').setup()    -- Tree
+require('nvim-tree').setup({    -- Tree
+    view = {
+        width = '20%',
+        mappings = {
+            list = {
+                { key = 's', action = 'vsplit'},
+            }
+        }
+    },
+    filters = {
+        dotfiles = true,
+    },
+})
+
+-- tagbar
+g.tagbar_width = '25%'
 
 
 -- Buffer Line
+require('scope').setup()
 require('bufferline').setup {   -- Buffers
     options = {
         offsets = {
@@ -25,9 +41,18 @@ require('bufferline').setup {   -- Buffers
             filetype = 'NvimTree',
             text = 'File Explorer',
             highlight = 'Directory',
-            text_align = 'left'
+            text_align = 'left',
+            padding = 1
+            },
+            {
+            filetype = 'tagbar',
+            text = 'Tags',
+            highlight = 'Directory',
+            -- text_align = 'left'
+            padding = 1
             }
         },
+        show_close_icon = false,
     }
 }
 
@@ -96,7 +121,7 @@ local luasnip = require('luasnip')
 cmp.setup({
     snippet = {
         expand = function(args)
-            luasnip.lsp_expand(arg.body)
+            luasnip.lsp_expand(args.body)
         end
     },
     sources = {
@@ -199,3 +224,20 @@ lsp.handlers['textDocument/signatureHelp'] = lsp.with(
   lsp.handlers.signature_help,
   {border = 'rounded'}
 )
+
+-- Syntax
+require('nvim-treesitter.configs').setup({ -- Tree Sitter
+    highlight = {
+        enable = true,
+        use_languagetree = true
+    },
+    indent = true
+})
+
+--api.nvim_create_autocmd({'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEnter'}, {
+  --group = api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
+  --callback = function()
+    --opt.foldmethod     = 'expr'
+    --opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+  --end
+--})

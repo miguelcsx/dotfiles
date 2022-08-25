@@ -25,6 +25,7 @@ require('packer').startup(function(use)
     'akinsho/bufferline.nvim',          -- Buffers
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }  -- Icons
     }
+    use 'tiagovla/scope.nvim'       -- Tabs
 
     -- UI
     use { 'mhinz/vim-startify' }            -- Start screen
@@ -59,6 +60,10 @@ require('packer').startup(function(use)
     use { 'jose-elias-alvarez/null-ls.nvim' }       -- Lint and Formater
     use { 'williamboman/mason.nvim' }               -- Package Manager
     use { 'williamboman/mason-lspconfig.nvim' }     -- Package Manager & Lsp Integration
+    use {
+        'nvim-treesitter/nvim-treesitter',          -- Syntax-highlight
+        run = function() require('nvim-treesitter.install').update({ with_sync = true })
+        end }
 
 
     -- Completion
