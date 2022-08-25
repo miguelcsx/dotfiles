@@ -1,12 +1,9 @@
--- lua/vars.lua
+-- lua/options.lua
 
 -- Imports
-local g = vim.g
 local o = vim.o
 local opt = vim.opt
-local api = vim.api
 local cmd  = vim.api.nvim_command
-
 -- UI
 o.number = true
 o.numberwidth = 2
@@ -25,7 +22,7 @@ o.breakindent = true
 o.textwidth = 300
 o.tabstop = 4
 o.shiftwidth = 4
-o.clipboard = 'unnamed'
+o.clipboard = 'unnamedplus'
 o.list = true
 o.listchars = 'trail:·,nbsp:◇,tab:→ ,extends:▸,precedes:◂'
 -- o.listchars = 'eol:¬,space:·,lead: ,trail:·,nbsp:◇,tab:→-,extends:▸,precedes:◂,multispace:···⬝,leadmultispace:│   ,'
@@ -62,7 +59,5 @@ opt.mouse = 'a'
 o.syntax = 'ON'
 o.termguicolors = true
 o.background = 'dark'
--- g.catppuccin_flavour = 'mocha' -- latte, frappe, macchiato, mocha
-g.neon_style = 'dark'
 cmd('colorscheme neon')
 

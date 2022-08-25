@@ -22,6 +22,6 @@ def random_theme():
 
     with open(path.join(theme_file)) as f:
         return json.load(f)
-    
+
 if __name__ == "__main__":
     random_theme()
