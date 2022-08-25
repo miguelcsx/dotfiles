@@ -4,15 +4,15 @@
  *******************************************************/
 
 configuration {
-    font:                           "Cascadia Code 12";
+    font:                           "UbuntuMono Nerd Font 12";
     show-icons:                     false;
-    icon-theme: 		    "Arc-X-D";
+    icon-theme: 		    "Papirus";
     scroll-method:                  0;
     disable-history:                false;
     sidebar-mode: 		    false;
 }
 
-@import "~/.config/rofi/arc_dark_transparent_colors.rasi"
+@import "~/.config/rofi/themes/arc_dark_transparent_colors.rasi"
 
 window {
     background-color:               @background;
@@ -119,5 +119,3 @@ textbox-prompt-colon {
     margin:     0px 0.3em 0em 0em ;
     text-color: @normal-foreground;
 }
-
-

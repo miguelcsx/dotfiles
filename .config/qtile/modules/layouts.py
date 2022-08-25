@@ -1,6 +1,5 @@
 from libqtile import layout
 from libqtile.config import Match
-from libqtile.layout import columns
 from .theme import colors
 
 layout_conf = {
@@ -12,20 +11,18 @@ layout_conf = {
 layouts = [
     layout.MonadTall(**layout_conf),
     layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    layout.Bsp(**layout_conf),
     layout.Columns(**layout_conf),
-    #layout.Matrix(columns=2,**layout_conf),
+    # Try more layouts by unleashing below layouts.
+    layout.Stack(num_stacks=2, **layout_conf),
+    layout.Bsp(**layout_conf),
+    layout.Matrix(columns=2, **layout_conf),
+    layout.MonadTall(**layout_conf),
     layout.MonadWide(**layout_conf),
-    layout.MonadThreeCol(**layout_conf),
     layout.RatioTile(**layout_conf),
-    #layout.Slice(),
-    #layout.Spiral(**layout_conf),
-    layout.Stack(**layout_conf),
-    layout.Tile(**layout_conf),
-    #layout.TreeTab(**layout_conf),
-    #layout.VerticalTile(**layout_conf),
-    #layout.Zoomy(**layout_conf),
+    # layout.Tile(),
+    # layout.TreeTab(),
+    # layout.VerticalTile(),
+    # layout.Zoomy(),
 ]
 
 floating_layout = layout.Floating(

@@ -1,6 +1,7 @@
+from dbus import Interface
 from libqtile import qtile, widget
 from .theme import colors
-from .keys import terminal
+from modules.keys import terminal
 import os
 
 # Get the icons at https://www.nerdfonts.com/cheat-sheet (you need a Nerd Font)
@@ -32,6 +33,7 @@ def powerline(fg="light", bg="dark"):
         fontsize=37,
         padding=-2
     )
+
 
 def workspaces():
     return [
@@ -83,24 +85,19 @@ primary_widgets = [
         no_update_string='0',
         display_format='{updates} ',
         update_interval=1800,
-	    #distro = 'Arch',
         custom_command='checkupdates',
-	mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e sudo pacman -Syu')},
+	mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e yay -Syu')},
     ),
 
     powerline('color3', 'color4'),
 
-    icon(bg="color3", text=' '),
+    icon(bg="color3", text=' '),
 
-    widget.CPU(**base(bg= 'color3'), format='{freq_current}GHz {load_percent}% '),
+    widget.Net(**base(bg='color3'), format='{down} ↓↑ {up} '),
 
     powerline('color2', 'color3'),
 
-    icon(bg="color2", text='溜'),
-
-    widget.Memory(**base(bg= 'color2'), mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')}, fmt='{} '),
-
-    #widget.DF(**base(bg= 'color2'), fmt=' {} ', visible_on_warn=False),
+    widget.KeyboardLayout(**base(bg='color2'), configured_keyboards=['latam', 'us'], display_map={'latam': 'latam ', 'us': 'us '}),
 
     powerline('color1', 'color2'),
 
@@ -112,7 +109,8 @@ primary_widgets = [
 
     widget.Systray(background=colors['dark'], padding=5),
 
-    separator(),
+    separator()
+
 ]
 
 secondary_widgets = [
@@ -126,7 +124,6 @@ secondary_widgets = [
 
     powerline('color2', 'color1'),
 
-
     icon(bg="color2", text=' '),
 
     widget.CPU(**base(bg= 'color2'), format='{freq_current}GHz {load_percent}% '),
@@ -135,9 +132,10 @@ secondary_widgets = [
 
     icon(bg="color3", text='溜'),
 
-    widget.Memory(**base(bg= 'color3'), mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')}, fmt='{} '),   
+    widget.Memory(**base(bg= 'color3'), mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},fmt='{} '),
 
     powerline('color4', 'color3'),
+
     icon(bg="color4", text=' '),
 
     widget.Net(**base(bg='color4'), format='{interface}: {down} ↓↑ {up} '),
@@ -147,6 +145,8 @@ secondary_widgets = [
     widget.Clock(**base(bg='color5'), format='%d/%m/%Y - %H:%M '),
 
     powerline('dark', 'color5'),
+
+    separator(),
 ]
 
 widget_defaults = {
@@ -155,4 +155,3 @@ widget_defaults = {
     'padding': 1,
 }
 extension_defaults = widget_defaults.copy()
-

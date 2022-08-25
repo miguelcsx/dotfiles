@@ -8,15 +8,15 @@ from .keys import mod, keys
 
 
 # Get the icons at https://www.nerdfonts.com/cheat-sheet (you need a Nerd Font)
-# Icons: 
+# Icons:
 
 # nf-fa-code,
-# nf-fa-firefox,  
-# nf-dev-terminal, 
-# nf-seti-config, 
-# nf-mdi-folder, 
-# nf-mdi-image, 
-# nf-mdi-layers, 
+# nf-fa-firefox,
+# nf-dev-terminal,
+# nf-seti-config,
+# nf-mdi-folder,
+# nf-mdi-image,
+# nf-mdi-layers,
 
 groups = [Group(i) for i in [
     "   ", "   ", "   ", "   ", "   ", "  ",
