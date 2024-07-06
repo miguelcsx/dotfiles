@@ -1,9 +1,13 @@
 -- init.lua
 
--- Nvim config with lua
+if vim.loader then
+    vim.loader.enable()
+end
 
--- Lua Imports
-require('config')       -- Plugins Configurations
-require('maps')         -- Keymaping
-require('options')      -- Neovim options
-require('plugins')      -- Plugins
+require('config.options')   -- Settings
+require('config.mappings')  -- Keymaps
+require('config.autocmds')  -- Autocmds
+-- require('config.utils')     -- Utils
+require('config.lazy')      -- Lazy
+
+vim.cmd('colorscheme carbonfox')

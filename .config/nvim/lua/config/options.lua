@@ -1,63 +1,56 @@
--- lua/options.lua
+-- lua/settings.lua
 
--- Imports
-local o = vim.o
-local opt = vim.opt
-local cmd  = vim.api.nvim_command
+local o  = vim.o
+local g = vim.g
+
 -- UI
+o.sw = 2
 o.number = true
+o.hidden = true
 o.numberwidth = 2
 o.relativenumber = true
-o.signcolumn = 'yes'
-o.hidden = true
-o.sw = 2
+g.tagbar_width = '25%'
 
 -- Editing
-o.expandtab = true
-o.smarttab = true
-o.cindent = true
-o.autoindent = true
-o.wrap = true
-o.breakindent = true
-o.textwidth = 300
 o.tabstop = 4
-o.shiftwidth = 4
-o.clipboard = 'unnamedplus'
 o.list = true
+o.wrap = true
+o.shiftwidth = 4
+o.cindent = true
+o.textwidth = 300
+o.smarttab = true
+o.expandtab = true
+o.autoindent = true
+o.breakindent = true
+o.clipboard = 'unnamedplus'
 o.listchars = 'trail:·,nbsp:◇,tab:→ ,extends:▸,precedes:◂'
 -- o.listchars = 'eol:¬,space:·,lead: ,trail:·,nbsp:◇,tab:→-,extends:▸,precedes:◂,multispace:···⬝,leadmultispace:│   ,'
 -- o.formatoptions = 'qrn1'
 
 -- Searching
-o.ignorecase = true
 o.smartcase = true
 o.hlsearch = false
+o.ignorecase = true
 
 -- Backups
 o.backup = false
-o.writebackup = false
 o.undofile = false
 o.swapfile = false
+o.writebackup = false
 
 -- History
-o.history = 50
+o.history = 100
 
--- Spliting
-o.splitright = true
+-- Splitting
 o.splitbelow = true
-
--- Folding
--- o.foldmethod = 'syntax'
--- o.foldlevelstart = 99
--- o.foldnestmax = 3
--- o.foldminlines = 1
+o.splitright = true
 
 -- Mouse
-opt.mouse = 'a'
+o.mouse = 'a'
 
 -- Theme
-o.syntax = 'ON'
+o.syntax = 'on'
 o.termguicolors = true
 o.background = 'dark'
-cmd('colorscheme neon')
 
+vim.diagnostic.config({virtual_text = false})
